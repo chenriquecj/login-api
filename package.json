@@ -1,0 +1,41 @@
+{
+    "name": "loginApi",
+	"description": "Boilerplate gerado pelo pacote lg-cli-tool criado por @luiys no github",
+    "version": "0.0.1",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/cors": "^2.8.12",
+        "@types/crypto-js": "^4.1.1",
+        "@types/express": "^4.17.13",
+        "@types/morgan": "^1.9.3",
+        "@types/node": "^17.0.21",
+        "@typescript-eslint/eslint-plugin": "^5.16.0",
+        "@typescript-eslint/eslint-plugin-tslint": "^5.16.0",
+        "@typescript-eslint/parser": "^5.16.0",
+        "eslint": "^8.11.0",
+        "eslint-plugin-unused-imports": "^2.0.0",
+        "ts-node": "^10.5.0",
+        "ts-node-dev": "^1.1.8",
+        "typescript": "^4.5.5"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "crypto-js": "^4.1.1",
+        "dotenv": "^16.0.0",
+        "express": "^4.15.4",
+        "helmet": "^5.0.2",
+        "morgan": "^1.10.0",
+        "rate-limiter-flexible": "^2.3.6",
+        "winston": "^3.6.0",
+        "winston-daily-rotate-file": "^4.6.1"
+    },
+    "scripts": {
+        "dev": "ts-node-dev --respawn --transpile-only --rs src/index.ts",
+        "build": "tsc && webpack",
+        "start": "node dist/api.bundle.js",
+        "lint": "eslint . --ext .ts",
+        "lint-fix": "eslint --fix . --ext .ts",
+        "g:c": "lg-cli-tool generate controller --dir",
+        "g:e": "lg-cli-tool generate entities"
+    }
+}
