@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model user_info {
+  id           Int      @id(map: "PK__user_inf__3213E83F751DC608") @default(autoincrement())
+  username     String   @db.NVarChar(50)
+  password     String   @db.NVarChar(255)
+  email        String   @db.NVarChar(100)
+  phoneNumber  String?  @db.NVarChar(20)
+  name         String   @db.NVarChar(50)
+  lastName     String   @db.NVarChar(50)
+  registerDate DateTime @default(now(), map: "DF__user_info__regis__49C3F6B7") @db.DateTime
+  flagDeleted  Boolean  @default(false, map: "DF__user_info__flagD__4AB81AF0")
+}
