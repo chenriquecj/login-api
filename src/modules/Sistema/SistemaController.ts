@@ -3,17 +3,10 @@ import { Get, Post } from "../../utils/decorators/Methods";
 import config from "./../../api.config.json";
 import { PrismaClient } from "@prisma/client";
 import { error } from "console";
+import { verifyUsername, verifyEmail, saveAccount, UserInfo } from "./register/createAccount";
+import { RetornoService } from "../../utils/RetornoService";
 
 const prisma = new PrismaClient();
-
-export interface UserInfo {
-    username: string;
-    password: string;
-    email: string;
-    phoneNumber: string;
-    name: string;
-    lastName: string;
-}
 
 export class SistemaController {
     @Get("/sistema/versao")
@@ -27,25 +20,13 @@ export class SistemaController {
     @Post("/api/register")
     async createAccount(req: Request, res: Response) {
         const newAccount: UserInfo = req.body;
-        const now = new Date();
-        now.setMilliseconds(0);
         try {
-            const createAccount = await prisma.user_info.create({
-                data: {
-                    username: newAccount.username,
-                    password: newAccount.password,
-                    email: newAccount.email,
-                    phoneNumber: newAccount.phoneNumber,
-                    name: newAccount.name,
-                    lastName: newAccount.lastName,
-                    registerDate: now,
-                    flagDeleted: false,
-                },
-            });
-
-            console.log("Account registered");
+            await verifyUsername(newAccount.username);
+            await verifyEmail(newAccount.email);
+            await saveAccount(newAccount);
+            return 'Account succesfully created!';
         } catch (error) {
-            console.log("Erro ao criar conta:", error);
+            return error as Error;
         }
     }
 }
